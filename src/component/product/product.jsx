@@ -8,8 +8,8 @@ const Product = () => {
 
   return (
     <div>
-      <Card />
-      <Basket />
+      <Card dispatch={dispatch} />
+      <Basket state={state} />
     </div>
   );
 };

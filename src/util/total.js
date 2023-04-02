@@ -9,3 +9,5 @@ export const itemTotal = (totalQuantity, specialPrice, specialQuantity, unitPric
 
 
 export const getBasketTotal = (state) => state.list.map(sku => state.data[sku]?.total).reduce((acc, curr) => acc + +curr, 0).toFixed(2)
+
+export const formatNumber = (nr) => Intl.NumberFormat('en-GB', { currency: 'GBP', style: 'currency' }).format(nr)

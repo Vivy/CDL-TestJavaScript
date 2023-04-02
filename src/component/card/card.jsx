@@ -1,8 +1,9 @@
 import { Field, Form, Formik } from 'formik';
 import { itemMap } from '../../data';
 import { addToCartAction } from '../../util/reducer';
+import { formatNumber } from '../../util/total';
 
-const Card = ({ dispatch }) => {
+const Card = ({ dispatch, state }) => {
   const handleAddToCart = ({ sku, quantity }) => {
     if (quantity > 0) {
       dispatch(addToCartAction(sku, quantity));
@@ -26,6 +27,7 @@ const Card = ({ dispatch }) => {
               <Field name='id' type='hidden' value={sku} />
               <Field name='quantity' type='number' min={0} />
               <button type='submit'>Add To Cart</button>
+              <p>Item Total: {formatNumber(state.data[sku]?.total || 0)}</p>
             </Form>
           </Formik>
         </div>

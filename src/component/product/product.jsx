@@ -9,7 +9,7 @@ const Product = () => {
 
   return (
     <div className='product'>
-      <Card dispatch={dispatch} />
+      <Card dispatch={dispatch} state={state} />
       <Basket state={state} dispatch={dispatch} />
     </div>
   );

@@ -1,5 +1,5 @@
 import { removeFromBasketAction, updateBasketAction } from '../../util/reducer';
-import { getBasketTotal } from '../../util/total';
+import { formatNumber, getBasketTotal } from '../../util/total';
 
 const Basket = ({ state, dispatch }) => {
   const handleUpdate = (e) =>
@@ -24,10 +24,10 @@ const Basket = ({ state, dispatch }) => {
           <button onClick={handleRemove} name={sku}>
             Remove
           </button>
-          <p>Total: {state.data[sku]?.total}</p>
+          <p>Total: {formatNumber(state.data[sku]?.total)}</p>
         </div>
       ))}
-      <p>Basket Total: {total}</p>
+      <p>Basket Total: {formatNumber(total)}</p>
     </div>
   );
 };

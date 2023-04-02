@@ -6,6 +6,7 @@ export const basketInitialState = {
   data: {}
 }
 
+
 export const addToCartAction = (sku, quantity) => ({
   type: 'ADD_TO_BASKET',
   item: {
@@ -20,6 +21,16 @@ export const updateBasketAction = (sku, quantity) => ({
   sku,
   quantity
 })
+
+export const removeFromBasketAction = (sku) => ({
+  type: 'REMOVE_FROM_BASKET',
+  sku
+})
+
+const removeObjectProperty = (object, key) => {
+  delete object[key]
+  return object
+}
 
 export const basketReducer = (state, action) => {
   switch (action.type) {
@@ -59,9 +70,13 @@ export const basketReducer = (state, action) => {
           }
         }
       }
+
     case 'REMOVE_FROM_BASKET':
       return {
-        //LOGIC
+        list: state.list.filter(a => a !== action.sku),
+        data: removeObjectProperty(
+          state.data, action.sku
+        )
       }
 
     default:

@@ -14,6 +14,12 @@ export const addToCartAction = (sku, quantity) => ({
   sku
 })
 
+export const updateBasketAction = (sku, quantity) => ({
+  type: 'UPDATE_BASKET',
+  sku,
+  quantity
+})
+
 export const basketReducer = (state, action) => {
   switch (action.type) {
 
@@ -31,7 +37,14 @@ export const basketReducer = (state, action) => {
 
     case 'UPDATE_BASKET':
       return {
-        //LOGIC
+        ...state,
+        data: {
+          ...state.data,
+          [action.sku]: {
+            ...state.data[action.sku],
+            quantity: +action.quantity
+          }
+        }
       }
     case 'REMOVE_FROM_BASKET':
       return {

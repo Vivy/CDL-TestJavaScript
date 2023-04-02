@@ -8,4 +8,4 @@ export const itemTotal = (totalQuantity, specialPrice, specialQuantity, unitPric
 }
 
 
-export const getBasketTotal = (state) => state.list.map(sku => state.data[sku]?.total).reduce((acc, curr) => acc + +curr, 0)
+export const getBasketTotal = (state) => state.list.map(sku => state.data[sku]?.total).reduce((acc, curr) => acc + +curr, 0).toFixed(2)

@@ -1,4 +1,5 @@
-import { itemMap } from '../data'
+import { itemMap, specialPrice } from '../data'
+import { itemTotal } from './total'
 
 export const basketInitialState = {
   list: [],
@@ -30,7 +31,13 @@ export const basketReducer = (state, action) => {
           ...state.data,
           [action.sku]: {
             ...state.data[action.sku],
-            quantity: +action.item.quantity + (+state.data[action.sku]?.quantity || 0)
+            quantity: +action.item.quantity + (+state.data[action.sku]?.quantity || 0),
+            total: itemTotal(
+              +action.item.quantity + (+state.data[action.sku]?.quantity || 0),
+              specialPrice[action.sku]?.price,
+              specialPrice[action.sku]?.quantity,
+              itemMap.data[action.sku].unitPrice
+            ).toFixed(2)
           }
         }
       }
@@ -42,7 +49,13 @@ export const basketReducer = (state, action) => {
           ...state.data,
           [action.sku]: {
             ...state.data[action.sku],
-            quantity: +action.quantity
+            quantity: +action.quantity,
+            total: itemTotal(
+              +action.quantity,
+              specialPrice[action.sku]?.price,
+              specialPrice[action.sku]?.quantity,
+              itemMap.data[action.sku].unitPrice
+            ).toFixed(2)
           }
         }
       }

@@ -1,9 +1,11 @@
 import { updateBasketAction } from '../../util/reducer';
+import { getBasketTotal } from '../../util/total';
 
 const Basket = ({ state, dispatch }) => {
   const handleUpdate = (e) =>
     dispatch(updateBasketAction(e.target.name, e.target.value));
 
+  const total = getBasketTotal(state);
   return (
     <div>
       {state.list.map((sku) => (
@@ -16,8 +18,10 @@ const Basket = ({ state, dispatch }) => {
             onChange={handleUpdate}
             min={0}
           />
+          <p>Total: {state.data[sku]?.total}</p>
         </div>
       ))}
+      <p>Basket Total: {total}</p>
     </div>
   );
 };

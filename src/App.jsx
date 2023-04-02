@@ -1,5 +1,11 @@
+import Product from './component/product/product';
+
 const App = () => {
-  return <div>CDL TEST</div>;
+  return (
+    <div>
+      <Product />
+    </div>
+  );
 };
 
 export default App;
